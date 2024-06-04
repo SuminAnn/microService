@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.user_service.dto.UserDto;
 import com.example.user_service.service.UserService;
 import com.example.user_service.vo.RequestUser;
+import com.example.user_service.vo.ResponseUser;
 
 @RestController
 @RequestMapping("/")
@@ -38,14 +39,15 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity createUser(@RequestBody RequestUser user){
+    public ResponseEntity<ResponseUser> createUser(@RequestBody RequestUser user){
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
         UserDto userDto = mapper.map(user, UserDto.class);
         userService.createUser(userDto);
         
+        ResponseUser responseUser = mapper.map(userDto, ResponseUser.class);
 
-        return ResponseEntity.status(HttpStatus.SC_CREATED).build();
+        return ResponseEntity.status(HttpStatus.SC_CREATED).body(responseUser);
     }
 }
