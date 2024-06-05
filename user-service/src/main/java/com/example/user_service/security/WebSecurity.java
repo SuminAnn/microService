@@ -1,6 +1,6 @@
 package com.example.user_service.security;
 
-import org.springframework.context.annotation.Configuration;
+// import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 // import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 // import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,13 +12,13 @@ import com.example.user_service.service.UserService;
 //@Configuration
 //@EnableWebSecurity
 public class WebSecurity{
-    // private UserService userService;
-    // private Environment env;
+    private UserService userService;
+    private Environment env;
 
-    // public WebSecurity(UserService userService, Environment env){
-    //     this.userService = userService;
-    //     this.env = env;
-    // }
+    public WebSecurity(UserService userService, Environment env){
+        this.userService = userService;
+        this.env = env;
+    }
 
     // protected SecurityFilterChain configure(HttpSecurity http)throws Exception{
 

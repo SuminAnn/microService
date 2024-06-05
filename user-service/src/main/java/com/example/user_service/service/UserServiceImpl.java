@@ -1,5 +1,7 @@
 package com.example.user_service.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.example.user_service.dto.UserDto;
 import com.example.user_service.jpa.UserEntity;
 import com.example.user_service.jpa.UserRepository;
+import com.example.user_service.vo.ResponseOrder;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -33,6 +36,21 @@ public class UserServiceImpl implements UserService{
 
         UserDto returnUserDto = mapper.map(userEntity, UserDto.class);
         return returnUserDto;
+    }
+
+    @Override
+    public UserDto getUserByUserId(String userId) {
+        UserEntity userEntity = userRepository.findByUserId(userId);
+        UserDto userDto = new ModelMapper().map(userEntity, UserDto.class);
+
+        List<ResponseOrder> orders = new ArrayList<>();
+        userDto.setOrders(orders);
+        return userDto;
+    }
+
+    @Override
+    public Iterable<UserEntity> getUserByAll() {
+        return userRepository.findAll();
     }
 
 }

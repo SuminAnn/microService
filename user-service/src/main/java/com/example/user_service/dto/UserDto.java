@@ -1,6 +1,9 @@
 package com.example.user_service.dto;
 
 import java.util.Date;
+import java.util.List;
+
+import com.example.user_service.vo.ResponseOrder;
 
 import lombok.Data;
 
@@ -13,4 +16,6 @@ public class UserDto {
     private Date createdAt;
 
     private String encryptedPwd;
+
+    private List<ResponseOrder> orders;
 }
